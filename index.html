@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Web3 Portal - Premium Sticky UI</title>
+    <style>
+        :root {
+            --primary: #6A5ACD; /* SlateBlue - slightly more vibrant */
+            --primary-dark: #483D8B; /* DarkSlateBlue */
+            --secondary: #FFD700; /* Gold - more prominent secondary */
+            --secondary-dark: #DAA520; /* GoldenRod */
+            --background: #0A0F1A; /* Slightly darker background */
+            --card-bg: #161B29; /* Darker card background */
+            --card-hover: #202638;
+            --text: #E0E0E0; /* Slightly softer white */
+            --text-secondary: #A0A0B0;
+            --error: #FF4757; /* Vivid Red */
+            --success: #2ED573; /* Bright Green */
+            --warning: #FFA500; /* Orange */
+            --info: #1E90FF; /* DodgerBlue */
+
+            /* RGB components for use in rgba() */
+            --primary-rgb: 106, 90, 205;
+            --secondary-rgb: 255, 215, 0; /* Gold */
+            --error-rgb: 255, 71, 87;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(var(--primary-rgb), 0.08) 0%, transparent 40%), 
+                radial-gradient(circle at 85% 85%, rgba(var(--secondary-rgb), 0.06) 0%, transparent 40%); 
+            padding-top: 328px; 
+        }
+
+        .sticky-wrapper { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 900;
+            background-color: var(--background); 
+            padding: 20px 20px 0 20px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px; 
+            animation: fadeInContent 0.8s 0.2s ease-out backwards;
+        }
+
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 20px; 
+            padding: 25px 20px;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #121620 100%);
+            border-radius: 16px;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            animation: slideDownHeader 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        @keyframes slideDownHeader { 
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .vip-badge, .alert-badge { 
+            color: var(--background);
+            padding: 9px 22px;
+            border-radius: 25px;
+            font-weight: 700; 
+            font-size: 13px; 
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: badgePulse 2.5s infinite ease-in-out;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .vip-badge {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+        }
+        .alert-badge {
+            background: linear-gradient(135deg, var(--info) 0%, #157ab3 100%);
+            color: white;
+        }
+
+        .vip-badge:hover, .alert-badge:hover {
+            transform: scale(1.08) translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+        }
+        
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); opacity: 0.95; }
+            50% { transform: scale(1.03); opacity: 1; }
+        }
+        
+        .web3-tag {
+            background: rgba(var(--primary-rgb), 0.15); 
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-block;
+            border: 1px solid rgba(var(--primary-rgb), 0.25); 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeIn 0.5s 0.3s ease-out backwards;
+        }
+        
+        .web3-tag:hover {
+            background: rgba(var(--primary-rgb), 0.25); 
+            transform: translateY(-3px) scale(1.03);
+            border-color: rgba(var(--primary-rgb), 0.4); 
+            box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.15); 
+        }
+
+        .sticky-controls {
+        }
+        
+        .container-login { 
+            margin-bottom: 15px; 
+            min-height: 1px; 
+        }
+                
+        .search-container { margin: 0 0 25px 0; position: relative; animation: fadeIn 0.5s 0.5s ease-out backwards;}
+        #searchInput {
+            width: 100%; padding: 16px 25px; padding-left: 50px; 
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0,0,0,0.25); color: var(--text); font-size: 16px;
+            transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        #searchInput:focus {
+            outline: none; border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(var(--primary-rgb),0.3), 0 3px 8px rgba(0,0,0,0.15); 
+            background: rgba(0,0,0,0.15);
+        }
+        #searchInput::placeholder { color: var(--text-secondary); }
+        .search-container::before { 
+            content: '🔍'; position: absolute; left: 18px; top: 50%;
+            transform: translateY(-50%); font-size: 18px;
+            color: var(--text-secondary); pointer-events: none; 
+        }
+        
+        .links-container {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 25px; 
+            padding-bottom: 30px; 
+        }
+        
+        .link-card {
+            background: linear-gradient(140deg, var(--card-bg) 0%, #121620 100%);
+            border-radius: 18px; 
+            padding: 28px; 
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.35s cubic-bezier(0.0, 0.0, 0.2, 1); 
+            position: relative; overflow: hidden;
+            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.02);
+            animation: cardAppearEnhanced 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            animation-fill-mode: backwards; 
+        }
+        
+        @keyframes cardAppearEnhanced {
+            from { opacity: 0; transform: translateY(25px) scale(0.97) rotateX(-10deg); }
+            to { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
+        }
+        
+        .link-card:hover {
+            transform: translateY(-8px) scale(1.01); 
+            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3), 0 0 0 1px rgba(var(--primary-rgb),0.5); 
+            border-color: rgba(var(--primary-rgb),0.4); 
+        }
+        .link-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(var(--primary-rgb),0.15), transparent 50%); 
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+        }
+        .link-card:hover::before { opacity: 1; }
+
+        .link-header { display: flex; align-items: center; margin-bottom: 22px; }
+        .link-icon {
+            width: 52px; height: 52px; border-radius: 14px; object-fit: contain;
+            margin-right: 18px; background: rgba(0,0,0,0.3); padding: 10px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.35s cubic-bezier(0.0, 0.0, 0.2, 1), box-shadow 0.35s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .link-card:hover .link-icon {
+            transform: scale(1.15) rotate(-8deg);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        .link-title { font-size: 20px; font-weight: 700; flex-grow: 1; color: var(--text); }
+        
+        .referral-code {
+            background: rgba(0,0,0,0.35); padding: 16px; border-radius: 12px; margin: 18px 0;
+            border: 1px dashed rgba(var(--secondary-rgb),0.5); 
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.3s ease;
+        }
+        .link-card:hover .referral-code {
+            background: rgba(var(--secondary-rgb),0.1); 
+            border-color: rgba(var(--secondary-rgb),0.8); 
+        }
+        .referral-code .code { color: var(--secondary); font-weight: 700; font-family: 'Fira Code', monospace; font-size: 15px; word-break: break-all; }
+        .copy-btn {
+            background: rgba(var(--secondary-rgb),0.2); 
+            color: var(--secondary);
+            border: none; padding: 9px 14px; border-radius: 8px; font-size: 13.5px; cursor: pointer;
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; flex-shrink: 0; font-weight: 500;
+        }
+        .copy-btn:hover {
+            background: var(--secondary); 
+            color: var(--background);    
+            transform: translateY(-2px) scale(1.03);
+        }
+        .copy-btn::before { content: '📋'; font-size: 14px; }
+        
+        .visit-btn {
+            background: linear-gradient(145deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white; border: none; padding: 14px; border-radius: 10px; width: 100%;
+            margin-top: 18px; font-weight: 700; font-size: 15px; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.0, 0.0, 0.2, 1); display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 3px 6px rgba(var(--primary-rgb),0.2); 
+        }
+        .visit-btn:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 6px 12px rgba(var(--primary-rgb),0.3); 
+            background: linear-gradient(145deg, var(--primary-dark) 0%, var(--primary) 100%);
+        }
+        .visit-btn::before { content: '↗'; font-size: 18px; }
+        
+        .stats {
+            text-align: center; 
+            color: var(--text-secondary); font-size: 14px; display: flex;
+            justify-content: center; gap: 18px; flex-wrap: wrap;
+            animation: fadeIn 0.5s 0.6s ease-out backwards; 
+            padding-bottom: 20px; 
+        }
+        .stats span { display: inline-flex; align-items: center; gap: 6px; }
+        .stats .online-status {
+            display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: var(--success);
+            animation: onlinePulse 1.8s infinite ease-in-out; box-shadow: 0 0 8px var(--success);
+        }
+        @keyframes onlinePulse { 0%,100% { opacity: 0.7; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); }}
+        .stats .offline-status { background: var(--error); box-shadow: 0 0 8px var(--error); animation: none; }
+        
+        .temp-notification {
+            position: fixed; top: 30px; left: 50%; transform: translateX(-50%); color: white;
+            padding: 14px 28px; border-radius: 10px; z-index: 2000; display: block; 
+            animation: fadeInOutNotif 3s ease-in-out forwards;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.25); font-weight: 600; font-size: 15px;
+            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1);
+        }
+        @keyframes fadeInOutNotif {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-35px) scale(0.95); }
+            10% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+            90% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-35px) scale(0.95); }
+        }
+        
+        .loading-spinner {
+            display: inline-block; width: 18px; height: 18px; border: 3.5px solid rgba(255,255,255,0.2);
+            border-radius: 50%; border-top-color: var(--primary);
+            animation: spinLoader 1s ease-in-out infinite;
+        }
+        @keyframes spinLoader { to { transform: rotate(360deg); } }
+        
+        @media (max-width: 768px) {
+            body { padding-top: 0; } 
+            .sticky-wrapper { position: static; padding: 15px 15px 0 15px; box-shadow: none; }
+            .container { padding: 0 15px; }
+            header { margin-bottom: 15px; padding: 20px 15px; }
+            .badge-container { flex-direction: column; gap: 10px; margin-bottom: 15px;}
+            .vip-badge, .alert-badge { padding: 8px 18px; font-size: 12px; }
+            .web3-tag { font-size: 13px; padding: 7px 15px; }
+            
+            .sticky-controls { margin-bottom: 0; }
+            .container-login {
+                margin-bottom: 15px; 
+                min-height: 0; 
+            }
+
+            .search-container { margin-bottom: 20px; }
+            #searchInput { padding: 14px 20px; padding-left: 45px; font-size: 15px; }
+            .search-container::before { left: 15px; font-size: 17px; }
+
+            .links-container { grid-template-columns: 1fr; gap: 18px; }
+            .link-card { padding: 22px; border-radius: 16px; }
+            .link-title { font-size: 18px; }
+            .link-icon { width: 46px; height: 46px; margin-right: 15px; padding: 8px; }
+            .referral-code { padding: 14px; margin: 16px 0; }
+            .visit-btn { padding: 13px; font-size: 15px; }
+
+            .stats { gap: 12px; font-size: 13px; margin-bottom: 0; padding-bottom: 15px; }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="sticky-wrapper">
+        <header>
+            <div class="badge-container">
+                <div class="vip-badge">VIP Member Access</div>
+                <div class="alert-badge">Exclusive Web3 Portal</div>
+            </div>
+            <div class="web3-tag">Curated Crypto & DeFi Resources</div>
+        </header>
+        
+        <div class="sticky-controls">
+            <div class="container-login">
+                <!-- Potentially for future login/user info display -->
+            </div>
+            
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search platforms, protocols, or codes..." aria-label="Search platforms, protocols, or codes">
+            </div>
+            
+            <div class="stats" id="stats">
+                <span><span class="loading-spinner"></span> Loading resources...</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="links-container" id="linksContainer">
+            <!-- Links will load here -->
+        </div>
+    </div>
+
+    <script>
+        if (typeof customIcons === 'undefined') {
+            var customIcons = {};
+        }
+    </script>
+
+    <script>
+        const SYNC_INTERVAL = 7000; 
+        const PLACEHOLDER_ICON_B64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzk0YTNiOCIgZD0iTTEyLDJDNi40OCwyLDIsNi40OCwyLDEyczQuNDgsMTAsMTAsMTBzMTAtNC40OCwxMC0xMFMxNy41MiwyLDEyLDJNMTIsMjBjLTQuNDEsMC04LTMuNTktOC04czMuNTktOCw4LThzOCwzLjU5LDgsOFM2LjQxLDIwLDEyLDIwWm0wLTExYy0xLjY1LDAtMywxLjM1LTMsM3MxLjM1LDMsMywzLDMtMS4zNSwzLTMtMS4zNS0zLTMtM1oiLz48L3N2Zz4=';
+        
+        function getDomain(url) {
+            try {
+                const domain = new URL(url).hostname.replace(/^www\./i, '');
+                return domain;
+            } catch { return ''; }
+        }
+
+        function generateIntelligentTitle(url) {
+            const domain = getDomain(url); 
+            if (!domain) return "Untitled Resource";
+
+            if (domain === "play.google.com") {
+                try {
+                    const urlObj = new URL(url);
+                    const idParam = urlObj.searchParams.get('id');
+                    if (idParam) {
+                        const parts = idParam.split('.');
+                        let appName = parts[parts.length - 1]; 
+                        
+                        if (parts.length > 1 && (appName === 'app' || appName === 'wallet' || appName === 'com') && (parts.length - 2 >= 0) ) {
+                           appName = parts[parts.length - 2] + (parts[parts.length-1] === 'wallet' ? ' Wallet' : ''); 
+                        } else if (parts.length === 1) { 
+                           appName = parts[0];
+                        }
+                        return appName.split(/[-_.]/) 
+                                      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                                      .join(' ') + " App";
+                    }
+                } catch { /* ignore error, fallback */ }
+                return "Google Play App"; 
+            }
+
+            let domainParts = domain.split('.');
+            let significantPart;
+            if (domainParts.length <= 2) { 
+                significantPart = domainParts[0];
+            } else { 
+                if ((domainParts[domainParts.length-2] === 'co' || 
+                     domainParts[domainParts.length-2] === 'com' || 
+                     domainParts[domainParts.length-2] === 'org' ||
+                     domainParts[domainParts.length-2] === 'app' 
+                    ) && domainParts.length > 2) { 
+                     significantPart = domainParts.slice(0, domainParts.length - 2).join('.'); 
+                } else { 
+                    significantPart = domainParts.slice(0, domainParts.length - 1).join('.');
+                }
+            }
+            return significantPart.replace(/\./g, ' ') 
+                                  .split(' ')
+                                  .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                                  .join(' ');
+        }
+
+        // Original list of links to be processed
+        const newLinkEntries = []; // <--- FIXED THIS LINE
+
+        // 1. Generate base default links from newLinkEntries
+        let generatedDefaultLinks = newLinkEntries.map((item, index) => {
+            const titleForId = generateIntelligentTitle(item.url).replace(/[^a-zA-Z0-9_]/g, '').substring(0,15);
+            const refForId = (item.referral && item.referral.length > 0) 
+                                ? item.referral.replace(/[^a-zA-Z0-9_]/g, '').substring(0,10) 
+                                : 'noref';
+            return {
+                id: `link_${titleForId}_${refForId}_${index}`, 
+                title: generateIntelligentTitle(item.url), 
+                url: item.url,
+                icon: "", // Icon will be fetched for these
+                referral: item.referral, 
+                timestamp: Date.now() - (newLinkEntries.length - 1 - index) * 60000 * 5 
+            };
+        });
+        
+        // === START: USER'S SPECIFIC PRE-DEFINED LINK ===
+        const userSpecificLink = {
+            id: "uniqueIdHere",      
+            title: "SpurPro", 
+            url: "https://spurpro.xyz/s/94yMLbsG9",  
+            icon: "https://i.postimg.cc/Nf01yXd6/Ari-Wallet-icon.png", // Pre-defined icon
+            referral: "mr", 
+            timestamp: Date.now() // Will make it appear as newest if no other link has a newer timestamp
+        };
+        // === END: USER'S SPECIFIC PRE-DEFINED LINK ===
+
+        // 3. Combine them to form the complete default set. Prepend user's link to make it prominent initially.
+        const defaultLinks = [userSpecificLink, ...generatedDefaultLinks];
+        
+        let allLinks = [];
+        try {
+            const storedLinks = localStorage.getItem('web3LinksV3');
+            // If localStorage has links, use them. Otherwise, use our `defaultLinks` array.
+            allLinks = storedLinks ? JSON.parse(storedLinks) : defaultLinks;
+        } catch (e) {
+            console.error("Error parsing links from localStorage:", e);
+            allLinks = defaultLinks; // Fallback to defaultLinks if parsing fails
+        }
+                
+        let filteredLinks = []; 
+        let lastUpdateTime = 0; 
+        
+        const elements = {
+            linksContainer: document.getElementById('linksContainer'),
+            searchInput: document.getElementById('searchInput'),
+            stats: document.getElementById('stats')
+        };
+
+        function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+        
+        async function getFaviconUrl(url, forceFetch = false) {
+            const domain = getDomain(url);
+            let originalUrlObject;
+            try {
+                 originalUrlObject = new URL(url);
+            } catch (e) {
+                return PLACEHOLDER_ICON_B64;
+            }
+
+            if (typeof customIcons === 'object' && customIcons !== null) {
+                if (originalUrlObject.hostname === "play.google.com") {
+                    const idParam = originalUrlObject.searchParams.get('id');
+                    if (idParam && customIcons[idParam]) {
+                        return customIcons[idParam];
+                    }
+                }
+                if (domain && customIcons[domain]) {
+                    return customIcons[domain];
+                }
+            }
+
+            if (!domain) return PLACEHOLDER_ICON_B64;
+
+            const base64CacheKey = `favicon_b64_v3_${domain}`;
+            const urlCacheKey = `favicon_url_v3_${domain}`;
+
+            if (!forceFetch) {
+                const cachedBase64 = localStorage.getItem(base64CacheKey);
+                if (cachedBase64) return cachedBase64;
+            }
+
+            if (navigator.onLine) {
+                const googleFaviconServiceUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+                try {
+                    const response = await fetch(googleFaviconServiceUrl);
+                    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+                    
+                    const blob = await response.blob();
+                    if (blob.type.startsWith('image/') && blob.size > 50) { 
+                        const base64Data = await blobToBase64(blob);
+                        localStorage.setItem(base64CacheKey, base64Data);
+                        localStorage.removeItem(urlCacheKey); 
+                        return base64Data;
+                    } else { 
+                        localStorage.removeItem(base64CacheKey); 
+                    }
+                } catch (error) {
+                    localStorage.setItem(urlCacheKey, googleFaviconServiceUrl); 
+                    return googleFaviconServiceUrl; 
+                }
+            }
+            
+            const cachedUrl = localStorage.getItem(urlCacheKey);
+            if (cachedUrl) return cachedUrl;
+            
+            localStorage.removeItem(base64CacheKey); 
+            localStorage.removeItem(urlCacheKey);
+            return PLACEHOLDER_ICON_B64;
+        }
+        
+        async function handleOnlineStatusChange() {
+            const isOnline = navigator.onLine;
+            updateStats(); 
+            if (isOnline) {
+                let iconsUpdated = false;
+                const updatePromises = allLinks.map(async (link) => {
+                    // MODIFIED CONDITION: Only try to update if icon is missing, placeholder, or a Google Favicon service URL
+                    let needsIconSystemUpdate = !link.icon || 
+                                                link.icon === PLACEHOLDER_ICON_B64 ||
+                                                (typeof link.icon === 'string' && link.icon.includes('google.com/s2/favicons'));
+                    
+                    if (needsIconSystemUpdate) {
+                        let isCustomIconSource = false;
+                        if (typeof customIcons === 'object' && customIcons !== null) {
+                            try {
+                                const urlObj = new URL(link.url);
+                                const domainToCheck = getDomain(link.url);
+                                if (urlObj.hostname === "play.google.com") {
+                                    const idParamCheck = urlObj.searchParams.get('id');
+                                    if (idParamCheck && customIcons[idParamCheck] && customIcons[idParamCheck] === link.icon) isCustomIconSource = true;
+                                }
+                                if (!isCustomIconSource && domainToCheck && customIcons[domainToCheck] && customIcons[domainToCheck] === link.icon) isCustomIconSource = true;
+                            } catch {}
+                        }
+
+                        if (!isCustomIconSource) { 
+                            const oldIcon = link.icon;
+                            const newIcon = await getFaviconUrl(link.url, true); // forceFetch = true
+                            if (newIcon !== oldIcon) {
+                                link.icon = newIcon;
+                                if (newIcon.startsWith('data:image') || (newIcon.startsWith('http') && oldIcon === PLACEHOLDER_ICON_B64)) {
+                                    iconsUpdated = true; 
+                                }
+                            }
+                        }
+                    }
+                });
+                await Promise.all(updatePromises);
+
+                if (iconsUpdated) { 
+                    saveLinks(); 
+                    renderLinks(); 
+                    showTempNotification("Resource icons refreshed.", "info"); 
+                }
+            }
+        }
+
+        async function initApp() {
+            const iconFetchPromises = allLinks.map(async (link) => {
+                // MODIFIED CONDITION: Only fetch if icon is missing, placeholder, or a Google Favicon service URL
+                // This ensures pre-set direct image URLs (like postimg.cc) are not overwritten by getFaviconUrl(link.url)
+                if (!link.icon || 
+                    link.icon === PLACEHOLDER_ICON_B64 ||
+                    (typeof link.icon === 'string' && link.icon.includes('google.com/s2/favicons')) 
+                ) {
+                    link.icon = await getFaviconUrl(link.url, false); 
+                }
+            });
+            await Promise.all(iconFetchPromises);
+            
+            allLinks.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); 
+            
+            if (allLinks.length > 0) {
+                const validTimestamps = allLinks.map(linkObj => linkObj.timestamp || 0).filter(ts => ts > 0);
+                lastUpdateTime = validTimestamps.length > 0 ? Math.max(...validTimestamps) : Date.now();
+            } else {
+                lastUpdateTime = Date.now(); 
+            }
+
+            filteredLinks = [...allLinks]; 
+
+            renderLinks(); 
+            setupEventListeners(); 
+            startStatsRefresher();
+            
+            window.addEventListener('online', handleOnlineStatusChange);
+            window.addEventListener('offline', handleOnlineStatusChange); 
+            await handleOnlineStatusChange(); 
+
+            elements.linksContainer.addEventListener('mousemove', e => {
+                const card = e.target.closest('.link-card');
+                if (card) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
+                    card.style.setProperty('--mouse-x', `${x}px`); card.style.setProperty('--mouse-y', `${y}px`);
+                }
+            });
+        }
+        
+        function setupEventListeners() {
+            elements.searchInput.addEventListener('input', handleSearch);
+            
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') { 
+                    e.preventDefault(); 
+                    elements.searchInput.focus(); 
+                    elements.searchInput.select(); 
+                }
+            });
+        }
+        
+        function handleSearch() {
+            const searchTerm = elements.searchInput.value.toLowerCase().trim();
+            filteredLinks = searchTerm 
+                ? allLinks.filter(link => 
+                    link.title.toLowerCase().includes(searchTerm) || 
+                    (link.referral && link.referral.toLowerCase().includes(searchTerm)) ||
+                    getDomain(link.url).toLowerCase().includes(searchTerm)
+                  )
+                : [...allLinks];
+            renderLinks();
+        }
+        
+        function renderLinks() {
+            if (!elements.linksContainer) {
+                console.error("[Render] linksContainer element not found!");
+                return;
+            }
+            elements.linksContainer.innerHTML = ''; 
+            if (filteredLinks.length === 0) {
+                const message = elements.searchInput.value.trim()
+                    ? '🚫 No resources match your search criteria.'
+                    : '✨ No resources available currently.';
+                elements.linksContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 30px 0; font-size: 1.1em;">${message}</p>`;
+                updateStats();
+                return;
+            }
+            
+            const fragment = document.createDocumentFragment();
+            filteredLinks.forEach((link, index) => {
+                const linkCard = document.createElement('div');
+                linkCard.className = 'link-card';
+                linkCard.style.animationDelay = `${index * 0.05}s`;
+                
+                const titleText = link.title || "Untitled Resource";
+                const domainText = getDomain(link.url) || 'Site';
+                const iconSrc = link.icon || PLACEHOLDER_ICON_B64;
+
+                const referralHTML = (link.referral && typeof link.referral === 'string' && link.referral.trim() !== '') ? `
+                    <div class="referral-code">
+                        <span style="margin-right: 8px; color: var(--text-secondary);">Tag:</span>
+                        <span class="code">${link.referral}</span>
+                        <button class="copy-btn" data-code="${link.referral}" title="Copy Tag">Copy Tag</button>
+                    </div>` : '';
+
+                linkCard.innerHTML = `
+                    <div class="link-header">
+                        <img src="${iconSrc}" alt="${titleText} icon" class="link-icon" onerror="this.onerror=null;this.src='${PLACEHOLDER_ICON_B64}'">
+                        <div class="link-title">${titleText}</div>
+                    </div>
+                    ${referralHTML}
+                    <button class="visit-btn" data-url="${link.url}">Visit ${domainText}</button>
+                `;
+                fragment.appendChild(linkCard);
+            });
+            elements.linksContainer.appendChild(fragment);
+            updateStats(); 
+            addDynamicEventListeners();
+        }
+        
+        function addDynamicEventListeners() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const button = e.currentTarget; 
+                    const code = button.getAttribute('data-code');
+                    if (!code) return;
+
+                    const originalContent = button.innerHTML; 
+                    const originalBG = button.style.backgroundColor;
+                    const originalColor = button.style.color;
+
+                    copyToClipboard(code, () => { 
+                        button.innerHTML = '✅ Copied!'; 
+                        button.style.backgroundColor = 'var(--success)'; 
+                        button.style.color = 'var(--background)';
+                        setTimeout(() => {
+                            button.innerHTML = originalContent; 
+                            button.style.backgroundColor = originalBG; 
+                            button.style.color = originalColor; 
+                        }, 2000);
+                    });
+                });
+            });
+            document.querySelectorAll('.visit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const url = e.currentTarget.getAttribute('data-url'); 
+                    if (url) {
+                        window.open(url, '_blank', 'noopener,noreferrer');
+                    }
+                });
+            });
+        }
+        
+        function updateStats() {
+            if (!elements.stats) return;
+
+            const totalLinks = allLinks.length; 
+            const shownLinks = filteredLinks.length;
+            const onlineStatusClass = navigator.onLine ? 'online-status' : 'offline-status';
+            const onlineText = navigator.onLine ? 'System Online' : 'System Offline';
+            
+            elements.stats.innerHTML = `
+                <span>📊 ${shownLinks} of ${totalLinks} Resources</span>
+                <span><span class="${onlineStatusClass}"></span> ${onlineText}</span>
+                <span>⏱️ Updated: ${formatTimestamp(lastUpdateTime)}</span>
+            `;
+        }
+        
+        function saveLinks() {
+            try {
+                localStorage.setItem('web3LinksV3', JSON.stringify(allLinks)); 
+                lastUpdateTime = Date.now(); 
+                updateStats(); 
+            } catch (e) {
+                console.error("[App] Error saving links to localStorage:", e);
+                showTempNotification("⚠️ Could not save link data (localStorage may be full).", "warning", 5000);
+            }
+        }
+        
+        function startStatsRefresher() { 
+            updateStats(); 
+            setInterval(updateStats, SYNC_INTERVAL); 
+        }
+        
+        function copyToClipboard(text, successCallback, errorCallback) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showTempNotification('📋 Copied to clipboard!', 'success');
+                    if (successCallback) successCallback();
+                }).catch(err => { 
+                    showTempNotification('❌ Copy failed!', 'error'); 
+                    console.error('Clipboard API copy failed: ', err); 
+                    if (errorCallback) errorCallback();
+                });
+            } else { 
+                const ta = document.createElement("textarea"); 
+                ta.value = text; 
+                ta.style.position = "fixed"; ta.style.left = "-9999px"; ta.style.top = "-9999px"; 
+                document.body.appendChild(ta); 
+                ta.focus(); ta.select();
+                try { 
+                    const successful = document.execCommand('copy'); 
+                    if (successful) {
+                        showTempNotification('📋 Copied (fallback)!', 'success');
+                        if (successCallback) successCallback();
+                    } else {
+                        throw new Error('execCommand copy failed');
+                    }
+                }
+                catch (err) { 
+                    showTempNotification('❌ Copy failed (fallback)!', 'error'); 
+                    console.error('Fallback copy method failed: ', err); 
+                    if (errorCallback) errorCallback();
+                }
+                document.body.removeChild(ta);
+            }
+        }
+                
+        function formatTimestamp(timestamp) { 
+            if (!timestamp || timestamp <= 0) return 'N/A';
+            
+            const date = new Date(timestamp);
+            const now = new Date();
+            const diffSeconds = Math.round((now.getTime() - date.getTime()) / 1000);
+
+            if (diffSeconds < 5) return 'Just now';
+            if (diffSeconds < 60) return `${diffSeconds}s ago`;
+            
+            const diffMinutes = Math.round(diffSeconds / 60);
+            if (diffMinutes < 60) return `${diffMinutes}m ago`;
+
+            const diffHours = Math.round(diffMinutes / 60);
+            if (diffHours < 24) return `${diffHours}h ago`;
+
+            const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
+            const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
+            return `${date.toLocaleDateString(undefined, dateOptions)} at ${date.toLocaleTimeString(undefined, timeOptions)}`;
+        }
+        
+        function showTempNotification(message, type = 'info', duration = 3000) {
+            const existingNotif = document.querySelector(`.temp-notification`);
+            if (existingNotif) existingNotif.remove(); 
+
+            const notif = document.createElement('div'); 
+            notif.className = `temp-notification`; 
+            const colors = { 
+                info: 'var(--info)', 
+                success: 'var(--success)', 
+                warning: 'var(--warning)', 
+                error: 'var(--error)' 
+            };
+            notif.style.backgroundColor = colors[type] || colors.info; 
+            notif.textContent = message;
+            document.body.appendChild(notif);
+            
+            notif.style.animationDuration = `${duration / 1000}s`;
+            setTimeout(() => { notif.remove(); }, duration);
+        }
+        
+        document.addEventListener('DOMContentLoaded', initApp); 
+    </script>
+</body>
+</html>
