@@ -2,841 +2,1113 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VIP Web3 Portal - Premium Sticky UI</title>
+    <meta name="mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WEB3 AIRDROP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@360;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --primary: #6A5ACD; /* SlateBlue - slightly more vibrant */
-            --primary-dark: #483D8B; /* DarkSlateBlue */
-            --secondary: #FFD700; /* Gold - more prominent secondary */
-            --secondary-dark: #DAA520; /* GoldenRod */
-            --background: #0A0F1A; /* Slightly darker background */
-            --card-bg: #161B29; /* Darker card background */
-            --card-hover: #202638;
-            --text: #E0E0E0; /* Slightly softer white */
-            --text-secondary: #A0A0B0;
-            --error: #FF4757; /* Vivid Red */
-            --success: #2ED573; /* Bright Green */
-            --warning: #FFA500; /* Orange */
-            --info: #1E90FF; /* DodgerBlue */
-
-            /* RGB components for use in rgba() */
-            --primary-rgb: 106, 90, 205;
-            --secondary-rgb: 255, 215, 0; /* Gold */
-            --error-rgb: 255, 71, 87;
-        }
+        	
+            --primary: #8a2be2;
+            --primary-light: #9d4edd;
+            --secondary: #ff9e00;
+            --background: #0f0c29;
+            --background-light: #1a1a2e;
+            --card-bg: #16213e;
+            --card-hover: #1e3a8a;
+            --text: #f8fafc;
+            --text-secondary: #94a3b8;
+            --error: #ff4d4d;
+            --success: #00c853;
+            --warning: #ffab00;
+            --info: #00b4d8;
+           --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --border-radius: 16px;
+            --box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            --transition: all 0.3s ease;
+        
+         }
         
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            background-color: #100f1c;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
             min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(var(--primary-rgb), 0.08) 0%, transparent 40%), 
-                radial-gradient(circle at 85% 85%, rgba(var(--secondary-rgb), 0.06) 0%, transparent 40%); 
-            padding-top: 328px; 
+            position: relative;
+            overflow-x: hidden;
+            touch-action: manipulation;
         }
 
-        .sticky-wrapper { 
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #ffae00, #cc33ff);
+            z-index: 10;
+        }
+        body::before {
+            top: 0;
+        }
+        body::after {
+            bottom: 0;
+        }
+        
+        
+      .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            
+            
+           
+              }
+        
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            position: relative;
+            box-shadow: var(--box-shadow);
+            background: linear-gradient(135deg, rgba(26,26,46,0.8) 0%, rgba(22,33,62,0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+         
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(138,43,226,0.1) 0%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+        }
+        
+        /* Badges */
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .vip-badge {
+            background: var(--gradient);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+            animation: pulse 2s infinite;
+        }
+        
+        .alert-badge {
+            background: var(--gradient);
+            color: white;
+            padding:8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+            animation: pulse 2s infinite;
+       }
+        
+     @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* User Info */
+        .user-info {
+            margin: 20px 0;
+        }
+        
+        .name {
+            font-size: 28px;
+            margin: 10px 0;
+            font-weight: bold;
+           background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .web3-tag {
+            background: rgba(138, 43, 226, 0.2);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 1px solid rgba(138,43,226,0.3);
+        }
+        
+        /* Search */
+        .search-container {
+            margin: 30px 0;
+            position: relative;
+            
+            
+             }
+        
+        #searchInput {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border-radius: var(--border-radius);
+            border: none;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+        }
+        
+        /* Stats */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            font-size: 14px;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .stat-icon {
+            color: var(--primary);
+        }
+        
+        /* Links Grid */
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .link-card {
+        	
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 10px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            background-color: #131129;
+      border-radius: 16px;
+      padding: 16px;
+      margin: 1px 0;
+      box-shadow: 0 0 15px #00b4d8;;
+            
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: rgba(138,43,226,0.3);
+        }
+        
+        
+            
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        
+        
+
+
+
+         
+            
+            
+        }
+        
+        .link-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .link-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            object-fit: contain;
+            margin-right: 15px;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            
+        }
+        
+        .link-title {
+            font-size: 18px;
+            font-weight: bold;
+            flex-grow: 1;
+            
+        }
+        
+        .link-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        
+        .referral-code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px dashed var(--secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            }
+
+        .referral-info {
+            display: flex;
+            align-items: baseline;
+            overflow: hidden;
+            min-width: 0;
+            flex-grow: 1;
+        }
+
+        .referral-info > span:first-child {
+            margin-right: 4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+       .referral-code .code {
+            color: var(--secondary);
+            font-weight: normal;
+            font-family: 'Roboto', monospace;
+            font-size: 17px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            vertical-align: baseline;
+            max-width: 100%;
+        }
+        
+        .copy-btn {
+            background: rgba(255, 158, 0, 0.2);
+            color: var(--secondary);
+            border: none;
+            padding: 6px 17px;
+            border-radius: 5px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-out, transform 0.2s ease-out; /* Added transform */
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255, 158, 0, 0.3);
+        }
+        
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        
+        
+        
+        
+        
+        .visit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 17px;
+            width: 100%;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition-ease-out); /* Use defined var */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(138,43,226,0.3);
+            animation: pulse 2s infinite;
+            
+            
+            
+            
+            
+            
+          
+            
+            
+           
+}
+
+.name {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 2px dashed transparent;
+  border-radius: 10px;
+  font-weight: bold;
+  color: orange;
+  position: relative;
+  background-color: #0b1b3a; /* dark bg */
+}
+
+.name::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 0px dashed;
+  border-radius: 16px;
+  background: linear-gradient(
+    270deg,
+    #ff8800,
+    #ff00cc,
+    #00b4d8,
+    #00ff95,
+    #ff8800
+  );
+  background-size: 400% 400%;
+  animation: borderMove 4s linear infinite;
+
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  padding: 2px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+
+            
+            
+            
+            
+            
+        }
+        
+        .visit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138,43,226,0.4);
+        }
+        
+        .link-date {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+        
+        .modal {
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            z-index: 900;
-            background-color: var(--background); 
-            padding: 20px 20px 0 20px; 
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px; 
-            animation: fadeInContent 0.8s 0.2s ease-out backwards;
-        }
-
-        @keyframes fadeInContent {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 20px; 
-            padding: 25px 20px;
-            background: linear-gradient(135deg, var(--card-bg) 0%, #121620 100%);
-            border-radius: 16px;
-            position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            animation: slideDownHeader 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        
-        @keyframes slideDownHeader { 
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .badge-container {
-            display: flex;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 15px;
+            align-items: center;
+            backdrop-filter: blur(5px);
         }
         
-        .vip-badge, .alert-badge { 
-            color: var(--background);
-            padding: 9px 22px;
-            border-radius: 25px;
-            font-weight: 700; 
-            font-size: 13px; 
-            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: badgePulse 2.5s infinite ease-in-out;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        .modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: modalFadeIn 0.3s ease-out;
         }
-        .vip-badge {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .alert-badge {
-            background: linear-gradient(135deg, var(--info) 0%, #157ab3 100%);
+        
+        .close-modal { 
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--error);
+            transform: rotate(90deg);
+        }
+        
+        /* Notifications */
+        .notification {
+            position: fixed;
+            padding: 15px 25px;
+            border-radius: 8px;
+            z-index: 1000;
+            display: none; 
+            align-items: center; 
+            gap: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+            max-width: 90%;
+            left: 50%;
+            transform: translateX(-50%);
             color: white;
         }
-
-        .vip-badge:hover, .alert-badge:hover {
-            transform: scale(1.08) translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1);
+        
+        .copy-notification {
+            top: 20px;
+            background: var(--success);
         }
         
-        @keyframes badgePulse {
-            0%, 100% { transform: scale(1); opacity: 0.95; }
-            50% { transform: scale(1.03); opacity: 1; }
+        .error-notification {
+            top: 20px; 
+            background: var(--error);
         }
         
-        .web3-tag {
-            background: rgba(var(--primary-rgb), 0.15); 
+        .notification-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px) translateX(-50%); }
+            to { opacity: 1; transform: translateY(0) translateX(-50%); }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state i {
+            font-size: 50px;
+            margin-bottom: 20px;
             color: var(--primary);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 14px;
-            display: inline-block;
-            border: 1px solid rgba(var(--primary-rgb), 0.25); 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            animation: fadeIn 0.5s 0.3s ease-out backwards;
+            opacity: 0.5;
         }
         
-        .web3-tag:hover {
-            background: rgba(var(--primary-rgb), 0.25); 
-            transform: translateY(-3px) scale(1.03);
-            border-color: rgba(var(--primary-rgb), 0.4); 
-            box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.15); 
-        }
-
-        .sticky-controls {
+        .empty-state p {
+            margin-top: 10px;
         }
         
-        .container-login { 
-            margin-bottom: 15px; 
-            min-height: 1px; 
-        }
-                
-        .search-container { margin: 0 0 25px 0; position: relative; animation: fadeIn 0.5s 0.5s ease-out backwards;}
-        #searchInput {
-            width: 100%; padding: 16px 25px; padding-left: 50px; 
-            border-radius: 12px; border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(0,0,0,0.25); color: var(--text); font-size: 16px;
-            transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        #searchInput:focus {
-            outline: none; border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(var(--primary-rgb),0.3), 0 3px 8px rgba(0,0,0,0.15); 
-            background: rgba(0,0,0,0.15);
-        }
-        #searchInput::placeholder { color: var(--text-secondary); }
-        .search-container::before { 
-            content: '🔍'; position: absolute; left: 18px; top: 50%;
-            transform: translateY(-50%); font-size: 18px;
-            color: var(--text-secondary); pointer-events: none; 
-        }
-        
-        .links-container {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 25px; 
-            padding-bottom: 30px; 
-        }
-        
-        .link-card {
-            background: linear-gradient(140deg, var(--card-bg) 0%, #121620 100%);
-            border-radius: 18px; 
-            padding: 28px; 
-            border: 1px solid rgba(255,255,255,0.06);
-            transition: all 0.35s cubic-bezier(0.0, 0.0, 0.2, 1); 
-            position: relative; overflow: hidden;
-            box-shadow: 0 8px 20px -5px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.02);
-            animation: cardAppearEnhanced 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            animation-fill-mode: backwards; 
-        }
-        
-        @keyframes cardAppearEnhanced {
-            from { opacity: 0; transform: translateY(25px) scale(0.97) rotateX(-10deg); }
-            to { opacity: 1; transform: translateY(0) scale(1) rotateX(0deg); }
-        }
-        
-        .link-card:hover {
-            transform: translateY(-8px) scale(1.01); 
-            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.3), 0 0 0 1px rgba(var(--primary-rgb),0.5); 
-            border-color: rgba(var(--primary-rgb),0.4); 
-        }
-        .link-card::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: inherit;
-            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 0%), rgba(var(--primary-rgb),0.15), transparent 50%); 
-            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
-        }
-        .link-card:hover::before { opacity: 1; }
-
-        .link-header { display: flex; align-items: center; margin-bottom: 22px; }
-        .link-icon {
-            width: 52px; height: 52px; border-radius: 14px; object-fit: contain;
-            margin-right: 18px; background: rgba(0,0,0,0.3); padding: 10px;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: transform 0.35s cubic-bezier(0.0, 0.0, 0.2, 1), box-shadow 0.35s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .link-card:hover .link-icon {
-            transform: scale(1.15) rotate(-8deg);
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-        }
-        .link-title { font-size: 20px; font-weight: 700; flex-grow: 1; color: var(--text); }
-        
-        .referral-code {
-            background: rgba(0,0,0,0.35); padding: 16px; border-radius: 12px; margin: 18px 0;
-            border: 1px dashed rgba(var(--secondary-rgb),0.5); 
-            display: flex; justify-content: space-between; align-items: center;
-            transition: all 0.3s ease;
-        }
-        .link-card:hover .referral-code {
-            background: rgba(var(--secondary-rgb),0.1); 
-            border-color: rgba(var(--secondary-rgb),0.8); 
-        }
-        .referral-code .code { color: var(--secondary); font-weight: 700; font-family: 'Fira Code', monospace; font-size: 15px; word-break: break-all; }
-        .copy-btn {
-            background: rgba(var(--secondary-rgb),0.2); 
-            color: var(--secondary);
-            border: none; padding: 9px 14px; border-radius: 8px; font-size: 13.5px; cursor: pointer;
-            transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; flex-shrink: 0; font-weight: 500;
-        }
-        .copy-btn:hover {
-            background: var(--secondary); 
-            color: var(--background);    
-            transform: translateY(-2px) scale(1.03);
-        }
-        .copy-btn::before { content: '📋'; font-size: 14px; }
-        
-        .visit-btn {
-            background: linear-gradient(145deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white; border: none; padding: 14px; border-radius: 10px; width: 100%;
-            margin-top: 18px; font-weight: 700; font-size: 15px; cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.0, 0.0, 0.2, 1); display: flex; align-items: center; justify-content: center; gap: 10px;
-            box-shadow: 0 3px 6px rgba(var(--primary-rgb),0.2); 
-        }
-        .visit-btn:hover {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 6px 12px rgba(var(--primary-rgb),0.3); 
-            background: linear-gradient(145deg, var(--primary-dark) 0%, var(--primary) 100%);
-        }
-        .visit-btn::before { content: '↗'; font-size: 18px; }
-        
-        .stats {
-            text-align: center; 
-            color: var(--text-secondary); font-size: 14px; display: flex;
-            justify-content: center; gap: 18px; flex-wrap: wrap;
-            animation: fadeIn 0.5s 0.6s ease-out backwards; 
-            padding-bottom: 20px; 
-        }
-        .stats span { display: inline-flex; align-items: center; gap: 6px; }
-        .stats .online-status {
-            display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: var(--success);
-            animation: onlinePulse 1.8s infinite ease-in-out; box-shadow: 0 0 8px var(--success);
-        }
-        @keyframes onlinePulse { 0%,100% { opacity: 0.7; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.1); }}
-        .stats .offline-status { background: var(--error); box-shadow: 0 0 8px var(--error); animation: none; }
-        
-        .temp-notification {
-            position: fixed; top: 30px; left: 50%; transform: translateX(-50%); color: white;
-            padding: 14px 28px; border-radius: 10px; z-index: 2000; display: block; 
-            animation: fadeInOutNotif 3s ease-in-out forwards;
-            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.25); font-weight: 600; font-size: 15px;
-            backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.1);
-        }
-        @keyframes fadeInOutNotif {
-            0% { opacity: 0; transform: translateX(-50%) translateY(-35px) scale(0.95); }
-            10% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-            90% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateX(-50%) translateY(-35px) scale(0.95); }
-        }
-        
-        .loading-spinner {
-            display: inline-block; width: 18px; height: 18px; border: 3.5px solid rgba(255,255,255,0.2);
-            border-radius: 50%; border-top-color: var(--primary);
-            animation: spinLoader 1s ease-in-out infinite;
-        }
-        @keyframes spinLoader { to { transform: rotate(360deg); } }
-        
+        /* Responsive */
         @media (max-width: 768px) {
-            body { padding-top: 0; } 
-            .sticky-wrapper { position: static; padding: 15px 15px 0 15px; box-shadow: none; }
-            .container { padding: 0 15px; }
-            header { margin-bottom: 15px; padding: 20px 15px; }
-            .badge-container { flex-direction: column; gap: 10px; margin-bottom: 15px;}
-            .vip-badge, .alert-badge { padding: 8px 18px; font-size: 12px; }
-            .web3-tag { font-size: 13px; padding: 7px 15px; }
-            
-            .sticky-controls { margin-bottom: 0; }
-            .container-login {
-                margin-bottom: 15px; 
-                min-height: 0; 
+            .links-container {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-
-            .search-container { margin-bottom: 20px; }
-            #searchInput { padding: 14px 20px; padding-left: 45px; font-size: 15px; }
-            .search-container::before { left: 15px; font-size: 17px; }
-
-            .links-container { grid-template-columns: 1fr; gap: 18px; }
-            .link-card { padding: 22px; border-radius: 16px; }
-            .link-title { font-size: 18px; }
-            .link-icon { width: 46px; height: 46px; margin-right: 15px; padding: 8px; }
-            .referral-code { padding: 14px; margin: 16px 0; }
-            .visit-btn { padding: 13px; font-size: 15px; }
-
-            .stats { gap: 12px; font-size: 13px; margin-bottom: 0; padding-bottom: 15px; }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            .name {
+                font-size: 24px;
+            }
+            
+            .modal-content { 
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--background);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-light);
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            grid-column: 1 / -1;
+        }
+        
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(138,43,226,0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    
-    <div class="sticky-wrapper">
+    <!-- Notifications -->
+    <div class="notification copy-notification" id="copyNotification">
+        <button class="notification-close" aria-label="Close notification">×</button>
+        <i class="fas fa-check-circle"></i> Referral Copy ©️
+    </div>
+
+    <div class="notification error-notification" id="errorNotification">
+        <button class="notification-close" aria-label="Close notification">×</button>
+        <i class="fas fa-exclamation-circle"></i> <span id="errorMessageText"></span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
         <header>
             <div class="badge-container">
-                <div class="vip-badge">VIP Member Access</div>
-                <div class="alert-badge">Exclusive Web3 Portal</div>
+                <div class="vip-badge">VIP MEMBER</div>
+                <div class="alert-badge">WEB3 PORTAL</div>
             </div>
-            <div class="web3-tag">Curated Crypto & DeFi Resources</div>
+
+            <div class="user-info">
+                <div class="name">WEB3 AIRDROP</div>
+               
+            </div>
         </header>
-        
-        <div class="sticky-controls">
-            <div class="container-login">
-                <!-- Potentially for future login/user info display -->
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search platforms...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+
+        <div class="stats" id="stats">
+            <div class="stat-item">
+                <i class="fas fa-link stat-icon"></i>
+                <span id="totalLinks">Loading...</span>
             </div>
-            
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Search platforms, protocols, or codes..." aria-label="Search platforms, protocols, or codes">
+            <div class="stat-item">
+                <i class="fas fa-sync-alt stat-icon"></i>
+                <span id="lastUpdated">Loading...</span>
             </div>
-            
-            <div class="stats" id="stats">
-                <span><span class="loading-spinner"></span> Loading resources...</span>
+            <div class="stat-item">
+                <i class="fas fa-plug stat-icon"></i>
+                <span id="connectionStatus">Online</span>
+            </div>
+        </div>
+
+        <div class="links-container" id="linksContainer">
+            <div class="loading">
+                <div class="spinner"></div>
             </div>
         </div>
     </div>
     
-    <div class="container">
-        <div class="links-container" id="linksContainer">
-            <!-- Links will load here -->
-        </div>
-    </div>
 
     <script>
-        if (typeof customIcons === 'undefined') {
-            var customIcons = {};
-        }
-    </script>
-
-    <script>
-        const SYNC_INTERVAL = 7000; 
-        const PLACEHOLDER_ICON_B64 = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzk0YTNiOCIgZD0iTTEyLDJDNi40OCwyLDIsNi40OCwyLDEyczQuNDgsMTAsMTAsMTBzMTAtNC40OCwxMC0xMFMxNy41MiwyLDEyLDJNMTIsMjBjLTQuNDEsMC04LTMuNTktOC04czMuNTktOCw4LThzOCwzLjU5LDgsOFM2LjQxLDIwLDEyLDIwWm0wLTExYy0xLjY1LDAtMywxLjM1LTMsM3MxLjM1LDMsMywzLDMtMS4zNSwzLTMtMS4zNS0zLTMtM1oiLz48L3N2Zz4=';
+        const SYNC_INTERVAL = 5000; 
         
-        function getDomain(url) {
-            try {
-                const domain = new URL(url).hostname.replace(/^www\./i, '');
-                return domain;
-            } catch { return ''; }
+        const defaultWeb3Links = [
+            {
+                title: "Sunwaves Token",
+                url: "https://sunwavestoken.com/@airdropsxyz",
+                description: "Referral",
+                referral: "airdropsxyz",
+                timestamp: Date.now()
+            },
+            {
+                title: "Spurpro Xyz",
+                url: "https://spurpro.xyz/s/94yMLbsG9",
+                description: "Referral",
+                referral: "94yMLbsG9",
+                timestamp: Date.now()
+            },
+            {             
+                title: "DeNet Storage",
+                url: "https://links.denet.app/mobile?referrer=",
+                icon: "https://i.postimg.cc/J0tHxjkJ/Ari-Wallet-icon.png", // This icon will now be used
+                description: "Referral",
+                referral: "0xe756f8c9a55ad68a61bf39065648eb92875065c2",            
+               timestamp: Date.now()
+            },
+            {
+                title: "Xenea Wallet",
+                url: "https://xenea.app/register/15thmPmiH0",
+                description: "Referral",
+                Referral: "15thmPmiH0",
+                timestamp: Date.now()
+            },
+            {
+                title: "Didit",
+                url: "https://didit.me/referral/6KPCSR",
+                description: "Referral",
+                referral: "6KPCSR",
+                timestamp: Date.now()
+            },
+            {
+                title: "ZAR: Global USD Wallet",
+                url: "https://ref.zar.app/iHG5GRvKhTb",
+                description: "Referral",
+                referral: "iHG5GRvKhTb",
+                timestamp: Date.now()
+            },
+            {             
+                title: "Klink Finance",
+                url: "https://join.klinkfinance.com/6TXz7ZmLhTb",
+                description: "WEB3",
+                referral: "6TXz7ZmLhTb",
+                timestamp: Date.now()
+            },
+            {
+                title: "Cpen Io",
+                url: "https://www.cpen.io?r=Web3AirDrop",
+                description: "WEB3",
+                referral: "Web3AirDrop",
+                timestamp: Date.now()
+            },
+            {
+                title: "Ari Wallet",
+                url: "https://play.google.com/store/apps/details?id=arichain.app.ari.wallet",
+                description: "WEB3",
+                referral: "678b7b8c45823",
+                timestamp: Date.now()
+            },
+            {
+                title: "Callfluent Io",
+                url: "https://callfluent.io/@airdrop",
+                description: "WEB3",
+                referral: "airdrop",
+                timestamp: Date.now()
+            },
+            {             
+                title: "Nodes Upnetwork",
+                url: "https://nodes.upnetwork.xyz?sid=web3airdrop",
+                description: "WEB3",
+                referral: "web3airdrop",
+                timestamp: Date.now()
+            },
+            {
+                title: "Unich",
+                url: "https://unich.com/en/airdrop/sign-up?ref=AMSTBK",
+                description: "WEB3",
+                referral: "AMSTBK",
+                timestamp: Date.now()
+            },
+        ];
+
+        let allLinks;
+
+        try {
+            const storedLinks = localStorage.getItem('web3Links');
+            if (storedLinks) {
+                const parsed = JSON.parse(storedLinks);
+                if (Array.isArray(parsed)) {
+                    allLinks = parsed;
+                } else {
+                    console.warn('Stored web3Links is not an array. Using default links.');
+                    allLinks = [...defaultWeb3Links];
+                }
+            } else {
+                allLinks = [...defaultWeb3Links];
+            }
+        } catch (error) {
+            console.error('Failed to parse web3Links from localStorage. Using default links.', error);
+            allLinks = [...defaultWeb3Links];
         }
 
-        function generateIntelligentTitle(url) {
-            const domain = getDomain(url); 
-            if (!domain) return "Untitled Resource";
+        allLinks = allLinks.map(link => {
+            const timestamp = (typeof link.timestamp === 'number' && !isNaN(link.timestamp)) ? link.timestamp : Date.now();
+            let finalIconUrl = link.icon;
+            const defaultSvgIcon = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzk0YTNiOCIgZD0iTTEyLDJDNi40OCwyLDIsNi40OCwyLDEyczQuNDgsMTAsMTAsMTBzMTAtNC40OCwxMC0xMFMxNy41MiwyLDEyLDJ6bTAsMThjLTQuNDEsMC04LTMuNTktOC04czMuNTktOCw4LTggOCwzLjU5LDgsOFM3LjYyLDIwLDEyLDIwek0xMSwxN2gxdjFoLTF2LTFoMWwtMy0zaC0xdjFoMVYxNkgxMXYxSDhMNiwxNUg1VjEzSDZWMTFINTVWOUg2TDgsN0g4VjZIOVY1aDRWOUgxMVY3aDJMODwxM0gxMXYxaDJMMTEsMTd6Ii8+PC9zdmc+';
 
-            if (domain === "play.google.com") {
-                try {
-                    const urlObj = new URL(url);
-                    const idParam = urlObj.searchParams.get('id');
-                    if (idParam) {
-                        const parts = idParam.split('.');
-                        let appName = parts[parts.length - 1]; 
-                        
-                        if (parts.length > 1 && (appName === 'app' || appName === 'wallet' || appName === 'com') && (parts.length - 2 >= 0) ) {
-                           appName = parts[parts.length - 2] + (parts[parts.length-1] === 'wallet' ? ' Wallet' : ''); 
-                        } else if (parts.length === 1) { 
-                           appName = parts[0];
-                        }
-                        return appName.split(/[-_.]/) 
-                                      .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                                      .join(' ') + " App";
+            if (!finalIconUrl || typeof finalIconUrl !== 'string' || !finalIconUrl.trim()) {
+                if (link.url && link.url !== "#" && link.url.trim()) {
+                    try {
+                        const domain = new URL(link.url).hostname.replace(/^www\./i, '');
+                        finalIconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+                    } catch (e) {
+                        console.warn(`Invalid URL for link "${link.title || 'Untitled'}": ${link.url}. Using default icon.`);
+                        finalIconUrl = defaultSvgIcon;
                     }
-                } catch { /* ignore error, fallback */ }
-                return "Google Play App"; 
-            }
-
-            let domainParts = domain.split('.');
-            let significantPart;
-            if (domainParts.length <= 2) { 
-                significantPart = domainParts[0];
-            } else { 
-                if ((domainParts[domainParts.length-2] === 'co' || 
-                     domainParts[domainParts.length-2] === 'com' || 
-                     domainParts[domainParts.length-2] === 'org' ||
-                     domainParts[domainParts.length-2] === 'app' 
-                    ) && domainParts.length > 2) { 
-                     significantPart = domainParts.slice(0, domainParts.length - 2).join('.'); 
-                } else { 
-                    significantPart = domainParts.slice(0, domainParts.length - 1).join('.');
+                } else {
+                    finalIconUrl = defaultSvgIcon;
                 }
             }
-            return significantPart.replace(/\./g, ' ') 
-                                  .split(' ')
-                                  .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                                  .join(' ');
-        }
 
-        // Original list of links to be processed
-        const newLinkEntries = []; // <--- FIXED THIS LINE
-
-        // 1. Generate base default links from newLinkEntries
-        let generatedDefaultLinks = newLinkEntries.map((item, index) => {
-            const titleForId = generateIntelligentTitle(item.url).replace(/[^a-zA-Z0-9_]/g, '').substring(0,15);
-            const refForId = (item.referral && item.referral.length > 0) 
-                                ? item.referral.replace(/[^a-zA-Z0-9_]/g, '').substring(0,10) 
-                                : 'noref';
             return {
-                id: `link_${titleForId}_${refForId}_${index}`, 
-                title: generateIntelligentTitle(item.url), 
-                url: item.url,
-                icon: "", // Icon will be fetched for these
-                referral: item.referral, 
-                timestamp: Date.now() - (newLinkEntries.length - 1 - index) * 60000 * 5 
+                id: link.id || `link_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+                title: link.title || "Untitled Link",
+                url: link.url || "#", 
+                icon: finalIconUrl, // Use the determined icon
+                description: link.description || "",
+                referral: link.referral || "",
+                timestamp: timestamp
             };
         });
-        
-        // === START: USER'S SPECIFIC PRE-DEFINED LINK ===
-        const userSpecificLink = {
-            id: "uniqueIdHere",      
-            title: "SpurPro", 
-            url: "https://spurpro.xyz/s/94yMLbsG9",  
-            icon: "https://i.postimg.cc/Nf01yXd6/Ari-Wallet-icon.png", // Pre-defined icon
-            referral: "mr", 
-            timestamp: Date.now() // Will make it appear as newest if no other link has a newer timestamp
-        };
-        // === END: USER'S SPECIFIC PRE-DEFINED LINK ===
 
-        // 3. Combine them to form the complete default set. Prepend user's link to make it prominent initially.
-        const defaultLinks = [userSpecificLink, ...generatedDefaultLinks];
-        
-        let allLinks = [];
-        try {
-            const storedLinks = localStorage.getItem('web3LinksV3');
-            // If localStorage has links, use them. Otherwise, use our `defaultLinks` array.
-            allLinks = storedLinks ? JSON.parse(storedLinks) : defaultLinks;
-        } catch (e) {
-            console.error("Error parsing links from localStorage:", e);
-            allLinks = defaultLinks; // Fallback to defaultLinks if parsing fails
+        allLinks.sort((a, b) => b.timestamp - a.timestamp);
+
+        let filteredLinks = [...allLinks];
+        let lastUpdateTime = 0;
+        if (allLinks.length > 0) {
+            lastUpdateTime = Math.max(...allLinks.map(link => link.timestamp));
         }
-                
-        let filteredLinks = []; 
-        let lastUpdateTime = 0; 
-        
+
         const elements = {
+            copyNotification: document.getElementById('copyNotification'),
+            errorNotification: document.getElementById('errorNotification'),
+            errorMessage: document.getElementById('errorMessageText'),
             linksContainer: document.getElementById('linksContainer'),
             searchInput: document.getElementById('searchInput'),
-            stats: document.getElementById('stats')
+            totalLinks: document.getElementById('totalLinks'),
+            lastUpdated: document.getElementById('lastUpdated'),
+            connectionStatus: document.getElementById('connectionStatus'),
+            notificationCloseButtons: document.querySelectorAll('.notification-close')
         };
 
-        function blobToBase64(blob) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onloadend = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(blob);
-            });
-        }
-        
-        async function getFaviconUrl(url, forceFetch = false) {
-            const domain = getDomain(url);
-            let originalUrlObject;
-            try {
-                 originalUrlObject = new URL(url);
-            } catch (e) {
-                return PLACEHOLDER_ICON_B64;
-            }
-
-            if (typeof customIcons === 'object' && customIcons !== null) {
-                if (originalUrlObject.hostname === "play.google.com") {
-                    const idParam = originalUrlObject.searchParams.get('id');
-                    if (idParam && customIcons[idParam]) {
-                        return customIcons[idParam];
-                    }
-                }
-                if (domain && customIcons[domain]) {
-                    return customIcons[domain];
-                }
-            }
-
-            if (!domain) return PLACEHOLDER_ICON_B64;
-
-            const base64CacheKey = `favicon_b64_v3_${domain}`;
-            const urlCacheKey = `favicon_url_v3_${domain}`;
-
-            if (!forceFetch) {
-                const cachedBase64 = localStorage.getItem(base64CacheKey);
-                if (cachedBase64) return cachedBase64;
-            }
-
-            if (navigator.onLine) {
-                const googleFaviconServiceUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-                try {
-                    const response = await fetch(googleFaviconServiceUrl);
-                    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-                    
-                    const blob = await response.blob();
-                    if (blob.type.startsWith('image/') && blob.size > 50) { 
-                        const base64Data = await blobToBase64(blob);
-                        localStorage.setItem(base64CacheKey, base64Data);
-                        localStorage.removeItem(urlCacheKey); 
-                        return base64Data;
-                    } else { 
-                        localStorage.removeItem(base64CacheKey); 
-                    }
-                } catch (error) {
-                    localStorage.setItem(urlCacheKey, googleFaviconServiceUrl); 
-                    return googleFaviconServiceUrl; 
-                }
-            }
-            
-            const cachedUrl = localStorage.getItem(urlCacheKey);
-            if (cachedUrl) return cachedUrl;
-            
-            localStorage.removeItem(base64CacheKey); 
-            localStorage.removeItem(urlCacheKey);
-            return PLACEHOLDER_ICON_B64;
-        }
-        
-        async function handleOnlineStatusChange() {
-            const isOnline = navigator.onLine;
-            updateStats(); 
-            if (isOnline) {
-                let iconsUpdated = false;
-                const updatePromises = allLinks.map(async (link) => {
-                    // MODIFIED CONDITION: Only try to update if icon is missing, placeholder, or a Google Favicon service URL
-                    let needsIconSystemUpdate = !link.icon || 
-                                                link.icon === PLACEHOLDER_ICON_B64 ||
-                                                (typeof link.icon === 'string' && link.icon.includes('google.com/s2/favicons'));
-                    
-                    if (needsIconSystemUpdate) {
-                        let isCustomIconSource = false;
-                        if (typeof customIcons === 'object' && customIcons !== null) {
-                            try {
-                                const urlObj = new URL(link.url);
-                                const domainToCheck = getDomain(link.url);
-                                if (urlObj.hostname === "play.google.com") {
-                                    const idParamCheck = urlObj.searchParams.get('id');
-                                    if (idParamCheck && customIcons[idParamCheck] && customIcons[idParamCheck] === link.icon) isCustomIconSource = true;
-                                }
-                                if (!isCustomIconSource && domainToCheck && customIcons[domainToCheck] && customIcons[domainToCheck] === link.icon) isCustomIconSource = true;
-                            } catch {}
-                        }
-
-                        if (!isCustomIconSource) { 
-                            const oldIcon = link.icon;
-                            const newIcon = await getFaviconUrl(link.url, true); // forceFetch = true
-                            if (newIcon !== oldIcon) {
-                                link.icon = newIcon;
-                                if (newIcon.startsWith('data:image') || (newIcon.startsWith('http') && oldIcon === PLACEHOLDER_ICON_B64)) {
-                                    iconsUpdated = true; 
-                                }
-                            }
-                        }
-                    }
-                });
-                await Promise.all(updatePromises);
-
-                if (iconsUpdated) { 
-                    saveLinks(); 
-                    renderLinks(); 
-                    showTempNotification("Resource icons refreshed.", "info"); 
-                }
-            }
-        }
-
-        async function initApp() {
-            const iconFetchPromises = allLinks.map(async (link) => {
-                // MODIFIED CONDITION: Only fetch if icon is missing, placeholder, or a Google Favicon service URL
-                // This ensures pre-set direct image URLs (like postimg.cc) are not overwritten by getFaviconUrl(link.url)
-                if (!link.icon || 
-                    link.icon === PLACEHOLDER_ICON_B64 ||
-                    (typeof link.icon === 'string' && link.icon.includes('google.com/s2/favicons')) 
-                ) {
-                    link.icon = await getFaviconUrl(link.url, false); 
-                }
-            });
-            await Promise.all(iconFetchPromises);
-            
-            allLinks.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); 
-            
-            if (allLinks.length > 0) {
-                const validTimestamps = allLinks.map(linkObj => linkObj.timestamp || 0).filter(ts => ts > 0);
-                lastUpdateTime = validTimestamps.length > 0 ? Math.max(...validTimestamps) : Date.now();
-            } else {
-                lastUpdateTime = Date.now(); 
-            }
-
-            filteredLinks = [...allLinks]; 
-
-            renderLinks(); 
-            setupEventListeners(); 
-            startStatsRefresher();
-            
+        function initApp() {
+            renderLinks();
+            setupEventListeners();
+            startLinkSync();
+            updateStats();
             window.addEventListener('online', handleOnlineStatusChange);
-            window.addEventListener('offline', handleOnlineStatusChange); 
-            await handleOnlineStatusChange(); 
+            window.addEventListener('offline', handleOnlineStatusChange);
+            handleOnlineStatusChange();
+        }
 
-            elements.linksContainer.addEventListener('mousemove', e => {
-                const card = e.target.closest('.link-card');
-                if (card) {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-                    card.style.setProperty('--mouse-x', `${x}px`); card.style.setProperty('--mouse-y', `${y}px`);
+        function handleOnlineStatusChange() {
+            if (elements.connectionStatus) {
+                if (navigator.onLine) {
+                    elements.connectionStatus.textContent = 'Online';
+                    elements.connectionStatus.style.color = 'var(--success)';
+                } else {
+                    elements.connectionStatus.textContent = 'Offline';
+                    elements.connectionStatus.style.color = 'var(--error)';
                 }
-            });
+            }
         }
-        
+
         function setupEventListeners() {
-            elements.searchInput.addEventListener('input', handleSearch);
-            
+            if (elements.searchInput) {
+                elements.searchInput.addEventListener('input', debounce(handleSearch, 300));
+            }
+            elements.notificationCloseButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const notification = e.target.closest('.notification');
+                    if (notification) hideNotification(notification);
+                });
+            });
             document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.key === 'k') { 
-                    e.preventDefault(); 
-                    elements.searchInput.focus(); 
-                    elements.searchInput.select(); 
+                if (e.key === 'Escape') {
+                    // closeAllModals(); // If modals are used in future
+                    if (elements.copyNotification.classList.contains('visible')) hideNotification(elements.copyNotification);
+                    if (elements.errorNotification.classList.contains('visible')) hideNotification(elements.errorNotification);
+                }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                    e.preventDefault();
+                    if (elements.searchInput) elements.searchInput.focus();
                 }
             });
         }
-        
-        function handleSearch() {
-            const searchTerm = elements.searchInput.value.toLowerCase().trim();
-            filteredLinks = searchTerm 
-                ? allLinks.filter(link => 
-                    link.title.toLowerCase().includes(searchTerm) || 
-                    (link.referral && link.referral.toLowerCase().includes(searchTerm)) ||
-                    getDomain(link.url).toLowerCase().includes(searchTerm)
-                  )
-                : [...allLinks];
+
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
+        function handleSearch() { filterLinks(); }
+
+        function filterLinks() {
+            const searchTerm = elements.searchInput ? elements.searchInput.value.toLowerCase().trim() : "";
+            filteredLinks = !searchTerm ? [...allLinks] : allLinks.filter(link =>
+                (link.title && link.title.toLowerCase().includes(searchTerm)) ||
+                (link.description && link.description.toLowerCase().includes(searchTerm)) ||
+                (link.referral && link.referral.toLowerCase().includes(searchTerm))
+            );
             renderLinks();
         }
-        
+
         function renderLinks() {
-            if (!elements.linksContainer) {
-                console.error("[Render] linksContainer element not found!");
-                return;
-            }
-            elements.linksContainer.innerHTML = ''; 
-            if (filteredLinks.length === 0) {
-                const message = elements.searchInput.value.trim()
-                    ? '🚫 No resources match your search criteria.'
-                    : '✨ No resources available currently.';
-                elements.linksContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-secondary); padding: 30px 0; font-size: 1.1em;">${message}</p>`;
-                updateStats();
-                return;
-            }
-            
+            if (!elements.linksContainer) return;
             const fragment = document.createDocumentFragment();
-            filteredLinks.forEach((link, index) => {
-                const linkCard = document.createElement('div');
-                linkCard.className = 'link-card';
-                linkCard.style.animationDelay = `${index * 0.05}s`;
-                
-                const titleText = link.title || "Untitled Resource";
-                const domainText = getDomain(link.url) || 'Site';
-                const iconSrc = link.icon || PLACEHOLDER_ICON_B64;
+            elements.linksContainer.innerHTML = ''; // Clear previous before adding new
 
-                const referralHTML = (link.referral && typeof link.referral === 'string' && link.referral.trim() !== '') ? `
-                    <div class="referral-code">
-                        <span style="margin-right: 8px; color: var(--text-secondary);">Tag:</span>
-                        <span class="code">${link.referral}</span>
-                        <button class="copy-btn" data-code="${link.referral}" title="Copy Tag">Copy Tag</button>
-                    </div>` : '';
+            if (filteredLinks.length === 0) {
+                const emptyState = document.createElement('div');
+                emptyState.className = 'empty-state';
+                emptyState.innerHTML = `<i class="fas fa-folder-open"></i><h3>No links found</h3><p>Try adjusting your search.</p>`;
+                fragment.appendChild(emptyState);
+            } else {
+                filteredLinks.forEach((link, index) => { // Added index for stagger
+                    const linkCard = document.createElement('div');
+                    linkCard.className = 'link-card'; // 'visible' class added by JS
+                    linkCard.setAttribute('data-id', link.id);
+                    const defaultIconOnError = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iIzk0YTNiOCIgZD0iTTEyLDJDNi40OCwyLDIsNi40OCwyLDEyUzYuNDgsMjIsMTIsMjJzMTAtNC40OCwxMC0xMFMxNy41MiwyLDEyLDJ6bTAtMWM0LjU4LDAsOC4zMSwzLjczLDguMzEsOC4zMVMxNi41OCwyMC4zMSwxMiwyMC4zMSBTMy42OSwxNi41OCwzLjY5LDEyUzcuNDIsMy42OSwxMiwzLjY5ek0xMSwxN2gxdjFoLTF2LTFoMWwtMy0zaC0xdjFoMVYxNkgxMXYxSDhMNiwxNUg1VjEzSDZWMTFINTVWOUg2TDgsN0g4VjZIOVY1aDRWOUgxMVY3aDJMODwxM0gxMXYxaDJMMTEsMTd6Ii8+PC9zdmc+';
 
-                linkCard.innerHTML = `
-                    <div class="link-header">
-                        <img src="${iconSrc}" alt="${titleText} icon" class="link-icon" onerror="this.onerror=null;this.src='${PLACEHOLDER_ICON_B64}'">
-                        <div class="link-title">${titleText}</div>
-                    </div>
-                    ${referralHTML}
-                    <button class="visit-btn" data-url="${link.url}">Visit ${domainText}</button>
-                `;
-                fragment.appendChild(linkCard);
-            });
+                    linkCard.innerHTML = `
+                        <div class="link-header">
+                            <img src="${link.icon}" alt="${link.title} icon" class="link-icon" loading="lazy" onerror="this.onerror=null;this.src='${defaultIconOnError}'; this.alt='Generic Link Icon';">
+                            <div class="link-title">${link.title}</div>
+                        </div>
+                        ${link.description ? `<div class="link-description">${link.description}</div>` : ''}
+                        ${link.referral ? `
+                        <div class="referral-code">
+                            <div class="referral-info">
+                                <span>Referral: </span>
+                                <span class="code" title="${link.referral}">${link.referral}</span>
+                            </div>
+                            <button class="copy-btn" data-code="${link.referral}" aria-label="Copy referral code ${link.referral}">
+                                <i class="fas fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        ` : ''}
+                        <div class="card-footer">
+                            <div class="link-date">${formatDate(link.timestamp)}</div>
+                            <button class="visit-btn" data-url="${link.url}" aria-label="Visit ${link.title}">
+                                <i class="fas fa-external-link-alt"></i> Visit
+                            </button>
+                        </div>
+                    `;
+                    fragment.appendChild(linkCard);
+                    // STAGGERED CARD ANIMATION TRIGGER
+                    setTimeout(() => {
+                        linkCard.classList.add('visible');
+                    }, index * 75); // 75ms delay per card
+                });
+            }
             elements.linksContainer.appendChild(fragment);
-            updateStats(); 
+            updateStats();
             addDynamicEventListeners();
         }
-        
+
         function addDynamicEventListeners() {
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const button = e.currentTarget; 
-                    const code = button.getAttribute('data-code');
-                    if (!code) return;
-
-                    const originalContent = button.innerHTML; 
-                    const originalBG = button.style.backgroundColor;
-                    const originalColor = button.style.color;
-
-                    copyToClipboard(code, () => { 
-                        button.innerHTML = '✅ Copied!'; 
-                        button.style.backgroundColor = 'var(--success)'; 
-                        button.style.color = 'var(--background)';
-                        setTimeout(() => {
-                            button.innerHTML = originalContent; 
-                            button.style.backgroundColor = originalBG; 
-                            button.style.color = originalColor; 
-                        }, 2000);
-                    });
+            elements.linksContainer.querySelectorAll('.copy-btn').forEach(btn => {
+                const newBtn = btn.cloneNode(true); // Prevents duplicate listeners on re-render
+                btn.parentNode.replaceChild(newBtn, btn);
+                newBtn.addEventListener('click', function() {
+                    copyToClipboard(this.getAttribute('data-code'));
                 });
             });
-            document.querySelectorAll('.visit-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const url = e.currentTarget.getAttribute('data-url'); 
-                    if (url) {
+            elements.linksContainer.querySelectorAll('.visit-btn').forEach(btn => {
+                const newBtn = btn.cloneNode(true);
+                btn.parentNode.replaceChild(newBtn, btn);
+                newBtn.addEventListener('click', function() {
+                    const url = this.getAttribute('data-url');
+                    if (url && url !== "#" && url.trim() !== "") {
                         window.open(url, '_blank', 'noopener,noreferrer');
+                    } else {
+                        showNotification('error', 'Invalid or missing URL.');
                     }
                 });
             });
         }
-        
+
         function updateStats() {
-            if (!elements.stats) return;
+            const total = allLinks.length;
+            if (elements.totalLinks) elements.totalLinks.textContent = `${total} Link${total !== 1 ? 's' : ''}`;
+            if (allLinks.length > 0) {
+                lastUpdateTime = Math.max(...allLinks.map(link => link.timestamp));
+            } else { lastUpdateTime = 0; }
+            if (elements.lastUpdated) elements.lastUpdated.textContent = `Updated: ${lastUpdateTime ? formatTime(lastUpdateTime) : 'N/A'}`;
+            handleOnlineStatusChange();
+        }
 
-            const totalLinks = allLinks.length; 
-            const shownLinks = filteredLinks.length;
-            const onlineStatusClass = navigator.onLine ? 'online-status' : 'offline-status';
-            const onlineText = navigator.onLine ? 'System Online' : 'System Offline';
-            
-            elements.stats.innerHTML = `
-                <span>📊 ${shownLinks} of ${totalLinks} Resources</span>
-                <span><span class="${onlineStatusClass}"></span> ${onlineText}</span>
-                <span>⏱️ Updated: ${formatTimestamp(lastUpdateTime)}</span>
-            `;
-        }
-        
-        function saveLinks() {
-            try {
-                localStorage.setItem('web3LinksV3', JSON.stringify(allLinks)); 
-                lastUpdateTime = Date.now(); 
-                updateStats(); 
-            } catch (e) {
-                console.error("[App] Error saving links to localStorage:", e);
-                showTempNotification("⚠️ Could not save link data (localStorage may be full).", "warning", 5000);
-            }
-        }
-        
-        function startStatsRefresher() { 
-            updateStats(); 
-            setInterval(updateStats, SYNC_INTERVAL); 
-        }
-        
-        function copyToClipboard(text, successCallback, errorCallback) {
-            if (navigator.clipboard && navigator.clipboard.writeText) {
+        function startLinkSync() { setInterval(updateStats, SYNC_INTERVAL); }
+
+        function copyToClipboard(text) {
+            if (!text) { showNotification('error', 'Nothing to copy.'); return; }
+            if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showTempNotification('📋 Copied to clipboard!', 'success');
-                    if (successCallback) successCallback();
-                }).catch(err => { 
-                    showTempNotification('❌ Copy failed!', 'error'); 
-                    console.error('Clipboard API copy failed: ', err); 
-                    if (errorCallback) errorCallback();
+                    showNotification('success', 'Copied to clipboard!');
+                }).catch(err => {
+                    console.warn('Async clipboard copy failed, trying fallback:', err);
+                    fallbackCopyToClipboard(text);
                 });
-            } else { 
-                const ta = document.createElement("textarea"); 
-                ta.value = text; 
-                ta.style.position = "fixed"; ta.style.left = "-9999px"; ta.style.top = "-9999px"; 
-                document.body.appendChild(ta); 
-                ta.focus(); ta.select();
-                try { 
-                    const successful = document.execCommand('copy'); 
-                    if (successful) {
-                        showTempNotification('📋 Copied (fallback)!', 'success');
-                        if (successCallback) successCallback();
-                    } else {
-                        throw new Error('execCommand copy failed');
-                    }
-                }
-                catch (err) { 
-                    showTempNotification('❌ Copy failed (fallback)!', 'error'); 
-                    console.error('Fallback copy method failed: ', err); 
-                    if (errorCallback) errorCallback();
-                }
-                document.body.removeChild(ta);
+            } else { fallbackCopyToClipboard(text); }
+        }
+
+        function fallbackCopyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed'; textarea.style.left = '-9999px';
+            document.body.appendChild(textarea);
+            textarea.focus(); textarea.select();
+            try {
+                if (document.execCommand('copy')) showNotification('success', 'Copied! (fallback)');
+                else showNotification('error', 'Fallback copy failed.');
+            } catch (err) {
+                console.error('Fallback copy error:', err);
+                showNotification('error', 'Failed to copy.');
             }
+            document.body.removeChild(textarea);
         }
-                
-        function formatTimestamp(timestamp) { 
-            if (!timestamp || timestamp <= 0) return 'N/A';
-            
-            const date = new Date(timestamp);
-            const now = new Date();
-            const diffSeconds = Math.round((now.getTime() - date.getTime()) / 1000);
 
-            if (diffSeconds < 5) return 'Just now';
-            if (diffSeconds < 60) return `${diffSeconds}s ago`;
-            
-            const diffMinutes = Math.round(diffSeconds / 60);
-            if (diffMinutes < 60) return `${diffMinutes}m ago`;
+        function showNotification(type, message) {
+            const notification = (type === 'success') ? elements.copyNotification : elements.errorNotification;
+            if (!notification) return;
 
-            const diffHours = Math.round(diffMinutes / 60);
-            if (diffHours < 24) return `${diffHours}h ago`;
+            if (type === 'error' && elements.errorMessage) elements.errorMessage.textContent = message;
 
-            const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
-            const timeOptions = { hour: 'numeric', minute: '2-digit', hour12: true };
-            return `${date.toLocaleDateString(undefined, dateOptions)} at ${date.toLocaleTimeString(undefined, timeOptions)}`;
+            if (notification.dataset.timeoutId) clearTimeout(parseInt(notification.dataset.timeoutId));
+
+            notification.style.display = 'flex';
+            requestAnimationFrame(() => { // Ensures display:flex is applied before class for transition
+                notification.classList.add('visible');
+            });
+
+            const timeoutId = setTimeout(() => hideNotification(notification), 3000);
+            notification.dataset.timeoutId = timeoutId.toString();
         }
-        
-        function showTempNotification(message, type = 'info', duration = 3000) {
-            const existingNotif = document.querySelector(`.temp-notification`);
-            if (existingNotif) existingNotif.remove(); 
 
-            const notif = document.createElement('div'); 
-            notif.className = `temp-notification`; 
-            const colors = { 
-                info: 'var(--info)', 
-                success: 'var(--success)', 
-                warning: 'var(--warning)', 
-                error: 'var(--error)' 
-            };
-            notif.style.backgroundColor = colors[type] || colors.info; 
-            notif.textContent = message;
-            document.body.appendChild(notif);
-            
-            notif.style.animationDuration = `${duration / 1000}s`;
-            setTimeout(() => { notif.remove(); }, duration);
+        function hideNotification(notification) {
+            if (!notification) return;
+            if (notification.dataset.timeoutId) {
+                clearTimeout(parseInt(notification.dataset.timeoutId));
+                delete notification.dataset.timeoutId;
+            }
+            notification.classList.remove('visible');
+            // display:none is handled by the timeout after transition
+            setTimeout(() => {
+                if (!notification.classList.contains('visible')) { // Check if it wasn't re-shown
+                     notification.style.display = 'none';
+                }
+            }, 300); // Match CSS transition duration
         }
-        
-        document.addEventListener('DOMContentLoaded', initApp); 
+
+        function formatTime(timestamp) {
+            if (!timestamp || isNaN(timestamp)) return 'N/A';
+            try { return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+            catch (e) { return 'Invalid Date'; }
+        }
+        function formatDate(timestamp) {
+            if (!timestamp || isNaN(timestamp)) return 'N/A';
+            try { return new Date(timestamp).toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' }); }
+            catch (e) { return 'Invalid Date'; }
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
 </html>
